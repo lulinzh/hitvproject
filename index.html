@@ -4,9 +4,8 @@
     <meta charset="utf-8">
     <title>Todo</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/sliderbox.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- 在使用 Cordova/PhoneGap 创建的 APP 中包含的文件，由 Cordova/PhoneGap 提供，(开发过程中显示 404) -->
@@ -32,7 +31,7 @@
                     <dt>{{category.title}}</dt>
                 </h4>
             </div>
-            <button class="button icon-right ion-ios-arrow-right button-clear button-positive pull-right ">更多推荐</button>
+            <button class="button icon-right ion-ios-arrow-right button-clear pull-right button-more">更多推荐</button>
         </div>
         <div class="content has-header">
             <div ng-if="$even" class="row row-no-padding padding-bottom" ng-repeat="item in category.item_list">
@@ -40,11 +39,11 @@
                     <div class=" item item-image padding-3 item-borderless padding-6-left"><img
                             ng-src="{{category.item_list[$index].thumb}}">
                     </div>
-                    <div class=" item-content padding-3">
+                    <div class=" item-content padding-5">
                         <span class="black">
                             {{category.item_list[$index].title}}
                         </span>
-                        <p class="" style="font-size: 10px"> {{category.item_list[$index].info}}</p>
+                        <p class="color-darkgray" style="font-size: 10px"> {{category.item_list[$index].info}}</p>
 
                     </div>
                 </div>
@@ -56,7 +55,7 @@
                         <span class="black">
                             {{category.item_list[$index+1].title}}
                         </span>
-                        <p class="" style="font-size: 10px"> {{category.item_list[$index+1].info}}</p>
+                        <p class="color-darkgray" style="font-size: 10px"> {{category.item_list[$index+1].info}}</p>
 
                     </div>
                 </div>

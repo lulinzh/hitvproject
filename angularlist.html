@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>精选</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+
+  </head>
+  <body>
+  <div ng-app="myApp" ng-controller="hitvTest"> 
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content">
+                <div class="card" ng-repeat="item in test_item_list" ng-click="onClickCard(item.test_id)">
+                    <!-- <div class="card-header">{{item.title}}
+                    </div> -->
+                    <div class="card-content">
+                      <div class="card-content-inner">{{item.title}}</div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src='http://ionic.projectd.in/hitv.js'></script>
+
+    <script type='text/javascript' src='http://g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('hitvTest', function($scope, $http) {
+            $.showPreloader('加载中');
+            $http.jsonp("http://hitv.lxsky.com/Home/WebApi/angular_test?callback=JSON_CALLBACK").success(function (response) {
+                if(response.status.code == 0){
+                    $scope.test_item_list = response.result;
+                    $.hidePreloader();
+                }
+            });  
+            initHitvBridge();
+            
+            $scope.onClickCard = function(params){ 
+                var hitvJS = new HitvJS()
+                if(params==1){
+                    hitvJS.getApi(function(responseData){
+                        $.toast(responseData);
+                        console.log(responseData);
+                    });
+                }else if(params==2){
+                    hitvJS.postSerchResultScene("CCTV" ,function(responseData){
+                        $.toast(responseData);
+                        console.log(responseData);
+                    });
+                }else if(params==3){
+                    hitvJS.getQRCodeResult("need_callback" ,function(responseData){
+                        $.toast(responseData);
+                        console.log(responseData);
+                    });
+                }else if(params==4){
+                    hitvJS.getQRCodeResult("new_page" ,function(responseData){
+                        $.toast(responseData);
+                        console.log(responseData);
+                    });
+                }else if(params==5){
+                    $.hidePreloader();
+                    $.toast('暂时没这个请求');
+                }else if(params==6){
+                    hitvJS.postVideoScene("8f80661069d89ed1b52dde2d2f1e013b", "CCAV-1", "http://hitvin.starcor1.net:8098/nn_cms_app_in/data/upimg/live/b/b/8/8f80661069d89ed1b52dde2d2f1e013b/4f8612399cd37c147d9f0855e417056d.jpg","tv",function(responseData){
+                        $.toast(responseData);
+                    });
+                    
+                }else if(params==7){
+                    $.hidePreloader();
+                    hitvJS.postWebScene(
+                        "www.baidu.com", 
+                        "艳红小首页",
+                        function(responseData){
+                            $.toast(responseData);
+                        }
+                    );
+                }else if(params==8){
+                    hitvJS.postShare(
+                        "http://www.baidu.com",
+                        "分享标题",
+                        "",
+                        "分享内容" ,
+                        function(responseData){
+                            $.toast(responseData);
+                            console.log(responseData);
+                        }
+                    );
+                }else{
+                    $.hidePreloader();
+                    $.toast('暂时没这个请求');
+                }
+            }
+        });
+    </script>
+  </body>
+</html>

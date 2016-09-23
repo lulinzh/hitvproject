@@ -55,6 +55,7 @@ app.controller('discoverController', function ($scope, $http, $ionicModal, $ioni
         item_list: [],
         webapp_list: []
     });
+    //var hitvJS = new HitvJS()
     $http.jsonp('http://10.0.64.226:8000/Hitv/get_discover_list?callback=JSON_CALLBACK')
         .success(function (response) {
             var item = [];
@@ -81,4 +82,8 @@ app.controller('discoverController', function ($scope, $http, $ionicModal, $ioni
         })
         .error(function (data, status, headers, config) {
         });
+    $scope.ToVideoInfo=function (video_id,title,thumb){
+        //hitvJS.postVideoScene(video_id, title, thumb,"tv",function(responseData){
+    //});
+    };
 });
